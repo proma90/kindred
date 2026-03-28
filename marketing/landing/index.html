@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kindred — Find Your People. Real Friendships for Adults.</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary:    #7C3AED;
+      --primary-dk: #6D28D9;
+      --primary-lt: #EDE9FE;
+      --accent:     #EC4899;
+      --accent-dk:  #DB2777;
+      --bg:         #F9F7FF;
+      --text:       #1A1035;
+      --text-muted: #6B6A8A;
+      --surface:    #FFFFFF;
+      --border:     #E5E0F8;
+      --radius-sm:  8px;
+      --radius-md:  16px;
+      --radius-lg:  24px;
+      --shadow-sm:  0 2px 8px rgba(124,58,237,0.08);
+      --shadow-md:  0 8px 32px rgba(124,58,237,0.12);
+      --shadow-lg:  0 20px 60px rgba(124,58,237,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .nav-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); background: var(--primary-lt); }
+    .nav-cta {
+      background: var(--primary) !important;
+      color: #fff !important;
+      padding: 9px 20px !important;
+      border-radius: 50px !important;
+    }
+    .nav-cta:hover { background: var(--primary-dk) !important; }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 45%, #4C1D95 100%);
+      padding: 80px 24px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(255,255,255,0.06) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background: #C4B5FD;
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.6; transform: scale(0.8); }
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .hero h1 span { color: #C4B5FD; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.82);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-store {
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    }
+    .btn-store:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.22); }
+    .btn-store-label { text-align: left; }
+    .btn-store-label small { display: block; font-size: 0.7rem; font-weight: 400; color: var(--text-muted); line-height: 1; margin-bottom: 2px; }
+    .btn-store-label strong { font-size: 0.95rem; line-height: 1; }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 80px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--primary-lt);
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 56px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+    }
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-lt);
+      color: var(--primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin: 0 auto 20px;
+    }
+    .step h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .step p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── FEATURES ── */
+    .features-bg { background: var(--surface); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-lt);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── SOCIAL PROOF ── */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .quote-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .quote-stars {
+      color: #F59E0B;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+    .quote-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .quote-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .quote-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .quote-location {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #7C3AED 0%, #4C1D95 100%);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(255,255,255,0.07) 0%, transparent 70%);
+    }
+    .cta-banner h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .cta-banner p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+    .cta-banner .btn-white {
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      padding: 15px 32px;
+      border-radius: 14px;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative;
+    }
+    .cta-banner .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      width: 100%;
+      text-align: center;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-icon">🌿</div>
+      <span class="nav-logo-text">Kindred</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#download" class="nav-cta">Download Free</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div style="position:relative">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Now available · Free to download
+    </div>
+    <h1>Make <span>real friends</span><br>as an adult.</h1>
+    <p class="hero-sub">
+      Kindred matches you with like-minded people for genuine platonic connection — based on personality, interests, and vibe. No awkward small talk required.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn btn-store">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="btn-store-label">
+          <small>Download on the</small>
+          <strong>App Store</strong>
+        </div>
+      </a>
+      <a href="#download" class="btn btn-store">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px"><path d="M3.18 23.76c.3.17.64.22.99.14l12.45-7.19-2.78-2.78-10.66 9.83zm-1.9-20.7C1.1 3.4 1 3.77 1 4.19v15.62c0 .42.1.8.28 1.13l.07.06 8.76-8.76v-.21L1.35 3.01l-.07.05zM20.47 10.5l-2.78-1.6-3.09 3.1 3.09 3.09 2.8-1.62c.8-.46.8-1.21-.02-1.97zM4.17.38L16.62 7.6 13.84 10.4 3.18.57C3.5.37 3.88.3 4.17.38z"/></svg>
+        <div class="btn-store-label">
+          <small>Get it on</small>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-item">✓ Free to download</div>
+      <div class="hero-trust-item">✓ No dating, no romance</div>
+      <div class="hero-trust-item">✓ EU privacy standards</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">From stranger to friend<br>in 4 simple steps</h2>
+    <p class="section-sub">Kindred removes the awkwardness of making friends as an adult — a short quiz, smart matching, and a safe space to connect.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Take the quiz</h3>
+        <p>Tell us about your personality, interests, lifestyle, and what you value in a friendship.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Get matched</h3>
+        <p>Our compatibility algorithm surfaces your daily deck — people who genuinely click with you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Connect &amp; chat</h3>
+        <p>Send a connect request. When it's mutual, a chat opens up. No pressure, no awkward cold messages.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Meet up</h3>
+        <p>Plan a hangout, join a Circle, or attend a local event. Real friendship happens in real life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features-bg">
+  <div class="section-inner">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need<br>to find your people</h2>
+    <p class="section-sub">Kindred is built around real friendship — not followers, not dates, not networking.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧭</div>
+        <h3>Daily Discover Deck</h3>
+        <p>A curated set of profiles matched to your personality every day — no endless scrolling.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Mutual Match Chat</h3>
+        <p>Chat only opens when both people connect. Safe, low-pressure, and intentional.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌀</div>
+        <h3>Circles</h3>
+        <p>Join or create small groups around shared interests — book clubs, hiking, board games, and more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Local Events</h3>
+        <p>Discover and RSVP to community events in your city. The easiest way to show up and meet people.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Hangout Planner</h3>
+        <p>Propose activities directly in a chat. From coffee to a day trip — plan without leaving the app.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Safe &amp; Private</h3>
+        <p>Verified profiles, block and report tools, and full GDPR compliance. Your safety comes first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-inner">
+    <div class="section-label">Reviews</div>
+    <h2 class="section-title">People are finding<br>their people</h2>
+    <p class="section-sub">Real stories from Kindred members across Europe.</p>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text">"I moved to a new city at 29 and had no idea how to make friends. Within three weeks on Kindred I had a hiking partner and a book club. This app is genuinely different."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">🌸</div>
+          <div>
+            <div class="quote-name">Sofia M.</div>
+            <div class="quote-location">Barcelona, Spain</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text">"The quiz matching actually works. I was sceptical but my first match and I have been meeting every week for two months. It's like the app just knew."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">🎸</div>
+          <div>
+            <div class="quote-name">Lukas B.</div>
+            <div class="quote-location">Berlin, Germany</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text">"Finally an app that's not about dating or networking. I just wanted to find people to go to concerts with. Found three so far. Highly recommend."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">🎵</div>
+          <div>
+            <div class="quote-name">Camille D.</div>
+            <div class="quote-location">Paris, France</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="download">
+  <div class="section-inner">
+    <div class="cta-banner">
+      <h2>Your people are already here.</h2>
+      <p>Download Kindred free and start connecting with people who actually get you.</p>
+      <a href="#" class="btn-white">Download Free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">🌿 Kindred</div>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:hello@kindred.app">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Kindred. Made with care in Europe.</div>
+  </div>
+</footer>
+
+</body>
+</html>
