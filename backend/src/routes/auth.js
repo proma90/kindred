@@ -23,8 +23,8 @@ router.post('/register', async (req, res) => {
     }
     const hash = await bcrypt.hash(password, 12);
     const { rows } = await query(
-      `INSERT INTO users (email, name) VALUES ($1, $2) RETURNING id, email, name, subscription_tier`,
-      [email.toLowerCase(), name]
+      `INSERT INTO users (email, password_hash, name) VALUES ($1, $2, $3) RETURNING id, email, name, subscription_tier`,
+      [email.toLowerCase(), hash, name]
     );
     const token = signToken(rows[0].id);
     res.status(201).json({ user: rows[0], token });

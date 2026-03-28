@@ -7,6 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
   name TEXT NOT NULL,
   age_range TEXT CHECK (age_range IN ('18-24','25-30','31-35','36-40','41-45','46+')),
   city TEXT,
