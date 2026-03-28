@@ -1,0 +1,28 @@
+{
+  "cli": { "version": ">= 5.9.3" },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "ios": { "simulator": true }
+    },
+    "production": {
+      "ios": { "resourceClass": "m-medium" },
+      "android": { "buildType": "apk" }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "your@email.com",
+        "ascAppId": "your-app-store-id"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./service-account-key.json"
+      }
+    }
+  }
+}

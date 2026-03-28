@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Kindred",
+    "slug": "kindred",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.kindred.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Kindred uses your location to show friends near you.",
+        "NSPhotoLibraryUsageDescription": "Kindred needs photo access to set your profile picture.",
+        "NSCameraUsageDescription": "Kindred uses your camera for profile verification."
+      }
+    },
+    "android": {
+      "package": "com.kindred.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "READ_MEDIA_IMAGES",
+        "CAMERA"
+      ]
+    },
+    "plugins": [
+      "expo-secure-store"
+    ],
+    "scheme": "kindred"
+  }
+}
