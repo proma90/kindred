@@ -31,8 +31,9 @@ function MainTabs() {
         tabBarStyle: {
           borderTopWidth: 1,
           borderTopColor: Colors.border,
-          paddingTop: 4,
-          height: 60,
+          paddingTop: 8,
+          paddingBottom: 8,
+          height: 70,
         },
         tabBarLabelStyle: { fontSize: 11, fontWeight: '600', marginBottom: 4 },
         tabBarIcon: ({ focused, color, size }) => {
@@ -43,7 +44,7 @@ function MainTabs() {
             Events: focused ? 'calendar' : 'calendar-outline',
             Profile: focused ? 'person' : 'person-outline',
           };
-          return <Ionicons name={icons[route.name]} size={24} color={color} />;
+          return <Ionicons name={icons[route.name]} size={28} color={color} />;
         },
       })}
     >
